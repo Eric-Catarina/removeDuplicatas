@@ -14,6 +14,21 @@ rl.on('line', entrada => {
 
     let verificaSeStringTemTamanhoImpar = (stringAlvo) => stringAlvo.length % 2 != 0
     let verificaSeStringEhDigrafo = (stringAlvo) => stringAlvo.length == 2
+    let verificaSeDigrafoRepete =  (digrafoAlvo) => {
+        let stringAlvoVetor = digrafoAlvo.split("")
+        if (stringAlvoVetor[0] == stringAlvoVetor[1]) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    let verificaSeEhDigrafoESeRepete = (entrada) =>{
+        if (verificaSeStringEhDigrafo(entrada)) {
+            return verificaSeDigrafoRepete (entrada)
+        }
+        return false
+    }
 
     let entradaSeparadaPorPalavras = entrada.split(" ")
     /*if (verificaSeStringTemTamanhoImpar(stringAlvo)) {
@@ -21,22 +36,17 @@ rl.on('line', entrada => {
     }*/
 
     let verificaSeTemDuplicata = (stringAlvo) => {
-        if (verificaSeStringEhDigrafo(stringAlvo)) {
-            let stringAlvoVetor = stringAlvo.split("")
-            if (stringAlvoVetor[0] == stringAlvoVetor[1]) {
-                return true
-            }
-        }
+
         let MetadeTermoUm = stringAlvo.slice(inicio, stringAlvo.length / 2 + inicio)
         let MetadeTermoDois = stringAlvo.slice(stringAlvo.length / 2 + inicio)
         /*
-        t orci daCida
-        0 1234 5678910
+        t|or|cidaCida
+        0|12|345678910
         */
         if (MetadeTermoUm == MetadeTermoDois) {
             return true
         }
-        else{
+        else {
             inicio += 2
             return verificaSeTemDuplicata(stringAlvo)
         }
@@ -46,8 +56,8 @@ rl.on('line', entrada => {
     resposta = MetadeTermoUm + ";" + MetadeTermoDois
         return true
     */
-
+    
     // Escreva a sua solução aqui
-    console.log(verificaSeTemDuplicata(entrada))
+    console.log(verificaSeEhDigrafoESeRepete(entrada))
 
 })

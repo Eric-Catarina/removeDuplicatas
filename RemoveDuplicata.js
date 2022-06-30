@@ -35,29 +35,40 @@ rl.on('line', entrada => {
         inicio = 1
     }*/
 
-    let verificaSeTemDuplicata = (stringAlvo) => {
+    let verificaSeTemDuplicataRecursiva = (stringAlvo) => {
 
-        let MetadeTermoUm = stringAlvo.slice(inicio, stringAlvo.length / 2 + inicio)
-        let MetadeTermoDois = stringAlvo.slice(stringAlvo.length / 2 + inicio)
+        let MetadeTermoUm = stringAlvo.slice(0, stringAlvo.length / 2)
+        let MetadeTermoDois = stringAlvo.slice(stringAlvo.length / 2)
+        console.log (MetadeTermoUm + ";" + MetadeTermoDois)
+        
         /*
         t|or|cidaCida
         0|12|345678910
         */
+        if (MetadeTermoUm  == "" || MetadeTermoDois ==""){
+            return false
+        }
         if (MetadeTermoUm == MetadeTermoDois) {
             return true
         }
         else {
-            inicio += 2
-            return verificaSeTemDuplicata(stringAlvo)
+            
+            stringAlvo = stringAlvo.slice(2)
+            return verificaSeTemDuplicataRecursiva(stringAlvo)
         }
     }
-
     /*
     resposta = MetadeTermoUm + ";" + MetadeTermoDois
         return true
     */
-    
     // Escreva a sua solução aqui
-    console.log(verificaSeEhDigrafoESeRepete(entrada))
+    let verificaSeTemDuplicata = (entrada) =>{
+        if (verificaSeStringTemTamanhoImpar(entrada)){
+            entrada = entrada.slice(1)
+        }
+        return verificaSeTemDuplicataRecursiva(entrada)
+    }
+    
+    console.log(verificaSeTemDuplicata(entrada))
 
 })
